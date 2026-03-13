@@ -4,8 +4,10 @@ from functools import lru_cache
 
 from pinecone import Pinecone, ServerlessSpec
 
-_INDEX_NAME = "financial-rag"
-_DIMENSION = 384
+# "investment" index exists in Pinecone with dim=1024 (llama-text-embed-v2).
+# HF Spaces /embed_query also produces 1024-dim vectors.
+_INDEX_NAME = os.getenv("PINECONE_INDEX", "investment")
+_DIMENSION = 1024
 _METRIC = "cosine"
 _BATCH_SIZE = 100
 
